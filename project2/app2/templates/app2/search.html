@@ -1,0 +1,31 @@
+{% extends 'app2/base.html' %}
+
+{% block content %}
+
+<h1>Search Results for "{{ query }}"</h1>
+{% if medicines %}
+<table class="table my-5">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Expiry Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for medicine in medicines %}
+            <tr>
+                <td>{{ medicine.name }}</td>
+                <td>{{ medicine.quantity }}</td>
+                <td>{{ medicine.price }}</td>
+                <td>{{ medicine.expirydate }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No medicines found.</p>
+{% endif %}
+<button class=" p-0 m-0 mr-2 btn btn-warning"  ><a class="nav-link text-white"  href="{% url 'home' %}"> Back </a></button>
+
+{% endblock content %}

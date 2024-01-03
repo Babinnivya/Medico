@@ -1,0 +1,17 @@
+{% extends 'app2/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col col-8 offset-2">
+            <h3 class="alert alert-warning text-center">Add Medicine Form</h3>
+            <form  method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Submit" class="btn btn-primary">
+                <a href="{% url 'list' %}" class="btn btn-primary"> Back to Home</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

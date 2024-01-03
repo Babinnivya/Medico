@@ -1,0 +1,66 @@
+
+{% extends 'app2/base.html' %}
+
+{% block content %}
+<div class="container">
+<h3 class="alert alert-warning text-center">Medicine List</h3>
+<table class="table my-5">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Sno</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Expiry Date</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in data  %}
+      <tr>
+        <th scope="row">{{i.id}}</th>
+        <td>{{i.name}}</td>
+        <td>{{i.quantity}}</td>
+        <td>{{i.price}}</td>
+        {% if i.expirydate <= today %}
+                <td style="color: red;">{{i.expirydate}}</td>
+                {% else %}
+                <td style="color: green;">{{i.expirydate}}</td>
+                {% endif %}
+                <td>
+
+            <a href="{% url 'update' i.id %}">
+           <button class="btn btn-success">update</button>
+        </a>
+        
+        <form action="{% url  'delete' i.id %}" method="post" class="d-inline">
+          {% csrf_token %}
+            <button class="btn btn-danger" type="button"data-toggle="modal" data-target="#myModal{{i.id}}" >Delete</button>
+            <div class="modal" id="myModal{{i.id}}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Confirm deletion</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure want to delete the record?!
+                  </div>
+                  <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                 <button type="submit" class="btn btn-danger">delete</button>
+                  </div>
+                  </div>
+              </div>
+            </div>
+        </form>
+        </td>
+      </tr>
+      
+      {% endfor %} 
+    </tbody>
+  </table>
+  <button class=" p-0 m-0 mr-2 btn btn-warning"  ><a class="nav-link text-white"  href="{% url 'add' %}"> Add Medicine </a></button>
+  <button class=" p-0 m-0 mr-2 btn btn-warning"  ><a class="nav-link text-white"  href="{% url 'home' %}"> Back </a></button>
+</div>
+    {% endblock content %}

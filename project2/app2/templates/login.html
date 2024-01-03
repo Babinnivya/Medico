@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login Form </title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-secondary">
+    <div class="container  py-5 h-100">
+        <div class="row  justify-content-center align-items-center h-100">
+            <div class=" col-sm-5 ">
+                <div class="container bg-white p-5 ">
+                    <h1> LOGIN</h1>
+                    <p class="text-muted">Please fill in this form to login</p>
+                    <form action="" method="post" >
+                        {% csrf_token %}
+                        <div class="form-outline">
+                            <div class="row">
+                                <div class="col"><input type="text" class="form-control bg-light" placeholder="Enter Username" id="username" name="username"></div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col"><input type="password" class="form-control bg-light" placeholder="Password" id="password" name="pass"></div>
+                            </div><br>
+                            <button type="submit" class="btn btn-success  btn-block px-5 ">login</button><br>
+                            {% if error_message %}
+                            <div class="error"> {{ error_message }}</div>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+                <div class="text-white text-center "> To create an account<a href="{% url 'signup' %}" class="text-white"> Click Here</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
